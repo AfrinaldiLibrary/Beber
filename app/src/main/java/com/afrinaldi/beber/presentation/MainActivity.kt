@@ -1,7 +1,8 @@
-package com.afrinaldi.beber
+package com.afrinaldi.beber.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.afrinaldi.beber.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

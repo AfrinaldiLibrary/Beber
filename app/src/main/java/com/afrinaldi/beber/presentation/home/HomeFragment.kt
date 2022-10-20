@@ -1,10 +1,11 @@
-package com.afrinaldi.beber
+package com.afrinaldi.beber.presentation.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.afrinaldi.beber.R
 
 class HomeFragment : Fragment() {
 

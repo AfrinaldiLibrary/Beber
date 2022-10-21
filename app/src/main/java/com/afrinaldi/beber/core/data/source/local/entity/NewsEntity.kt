@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "news")
 data class NewsEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "newsId")
-    var newsId: String,
+    @ColumnInfo(name = "id")
+    val id: Int = 0,
 
     @ColumnInfo(name = "name")
     var name: String,
@@ -32,5 +32,5 @@ data class NewsEntity(
     var url: String,
 
     @ColumnInfo(name = "isFavorite")
-    var isFavorite: String,
+    var isFavorite: Boolean = false
 )

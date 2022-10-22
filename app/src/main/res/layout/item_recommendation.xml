@@ -40,15 +40,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <io.alterac.blurkit.BlurLayout
+        <View
             android:id="@+id/blurLayout"
             android:layout_width="0dp"
             android:layout_height="138dp"
             android:background="@drawable/shape_corner16"
             android:backgroundTint="#4D272727"
-            app:blk_blurRadius="3"
-            app:blk_cornerRadius="16dp"
-            app:blk_fps="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

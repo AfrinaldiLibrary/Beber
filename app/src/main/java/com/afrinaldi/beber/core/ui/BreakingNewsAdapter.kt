@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.afrinaldi.beber.R
 import com.afrinaldi.beber.core.domain.model.News
+import com.afrinaldi.beber.core.utils.Helper
 import com.afrinaldi.beber.databinding.ItemRecommendationBinding
 import com.bumptech.glide.Glide
-import eightbitlab.com.blurview.RenderEffectBlur
 import eightbitlab.com.blurview.RenderScriptBlur
 
 class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>() {
@@ -40,7 +40,7 @@ class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>
                     .load(data.image)
                     .into(ivMain)
                 tvTitle.text = data.title
-                tvDate.text = data.date
+                tvDate.text = Helper.formatDate(data.date)
             }
 
             binding.blurLayoutBg.setupWith(binding.root, RenderScriptBlur(itemView.context))

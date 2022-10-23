@@ -5,27 +5,29 @@ import com.afrinaldi.beber.core.data.source.remote.response.ArticlesItem
 import com.afrinaldi.beber.core.domain.model.News
 
 object DataMapper {
-    fun mapResponsesToEntities(input: List<ArticlesItem?>): List<NewsEntity> {
+    fun mapResponsesToEntities(input: List<ArticlesItem>): List<NewsEntity> {
         val newsList = ArrayList<NewsEntity>()
         input.map {
             val news = NewsEntity(
-                name = it?.source!!.name.toString(),
-                title = it.title.toString(),
-                date = it.publishedAt.toString(),
-                image = it.urlToImage.toString(),
+                id = 0,
+                name = it.source.name,
+                title = it.title,
+                date = it.publishedAt,
+                image = it.urlToImage ?: "https://picsum.photos/id/1/200/300",
                 content = it.content ?: "No content created",
                 author = it.author ?: "Anonymous",
-                url = it.url.toString(),
-                isFavorite = false,
+                url = it.url,
+                isBookmark = false
             )
             newsList.add(news)
         }
         return newsList
     }
 
-    fun mapEntityToDomain(input: List<NewsEntity>): List<News> =
+    fun mapEntitiesToDomain(input: List<NewsEntity>): List<News> =
         input.map {
             News(
+                id = it.id,
                 name = it.name,
                 title = it.title,
                 date = it.date,
@@ -33,12 +35,13 @@ object DataMapper {
                 content = it.content,
                 author = it.author,
                 url = it.url,
-                isFavorite = false,
+                isBookmark = it.isBookmark,
             )
         }
 
     fun mapDomainToEntity(input: News) =
         NewsEntity(
+            id = input.id,
             name = input.name,
             title = input.title,
             date = input.date,
@@ -46,6 +49,6 @@ object DataMapper {
             content = input.content,
             author = input.author,
             url = input.url,
-            isFavorite = input.isFavorite,
+            isBookmark = input.isBookmark
         )
 }

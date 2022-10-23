@@ -6,9 +6,9 @@ import com.afrinaldi.beber.core.domain.repository.INewsRepository
 class NewsInteractor(private val newsRepository: INewsRepository) : NewsUseCase {
     override fun getAllNews() = newsRepository.getAllNews()
 
-    override fun getFavoriteNews() = newsRepository.getFavoriteNews()
+    override fun getBookmarkNews() = newsRepository.getBookmarkNews()
 
-    override fun setFavoriteNews(news: News, isFavorite: Boolean) =
-        newsRepository.setFavoriteNews(news, isFavorite)
+    override fun setBookmarkNews(news: News, isBookmark: Boolean) =
+        newsRepository.setBookmarkNews(news, isBookmark)
 
 }

@@ -1,7 +1,6 @@
 package com.afrinaldi.beber.core.data
 
 import com.afrinaldi.beber.core.data.source.remote.network.ApiResponse
-import com.afrinaldi.beber.core.data.source.remote.response.ArticlesItem
 import kotlinx.coroutines.flow.*
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
@@ -34,9 +33,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-    protected abstract suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem?>>>
+    protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 
-    protected abstract suspend fun saveCallResult(data: List<ArticlesItem?>)
+    protected abstract suspend fun saveCallResult(data: RequestType)
 
     fun asFlow(): Flow<Resource<ResultType>> = result
 }

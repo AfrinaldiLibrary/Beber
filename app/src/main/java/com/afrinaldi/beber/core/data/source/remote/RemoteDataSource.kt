@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class RemoteDataSource (private val apiService: ApiService) {
-    suspend fun getAllNews(): Flow<ApiResponse<List<ArticlesItem?>>> {
+    suspend fun getAllNews(): Flow<ApiResponse<List<ArticlesItem>>> {
         //get data from remote api
         return flow {
             try {
                 val response = apiService.getHeadlines()
                 val dataArray = response.articles
-                if (dataArray!!.isNotEmpty()){
+                if (dataArray.isNotEmpty()){
                     emit(ApiResponse.Success(response.articles))
                 } else {
                     emit(ApiResponse.Empty)

@@ -31,6 +31,6 @@ data class NewsEntity(
     @ColumnInfo(name = "url")
     var url: String,
 
-    @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean = false
+    @ColumnInfo(name = "isBookmark")
+    var isBookmark: Boolean = false
 )

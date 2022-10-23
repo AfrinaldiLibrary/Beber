@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface INewsRepository {
     fun getAllNews() : Flow<Resource<List<News>>>
 
-    fun getFavoriteNews(): Flow<List<News>>
+    fun getBookmarkNews(): Flow<List<News>>
 
-    fun setFavoriteNews(news: News, isFavorite: Boolean)
+    fun setBookmarkNews(news: News, isBookmark: Boolean)
 }

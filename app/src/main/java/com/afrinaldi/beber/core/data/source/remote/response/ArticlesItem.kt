@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ArticlesItem(
 
     @field:SerializedName("publishedAt")
-    val publishedAt: String? = null,
+    val publishedAt: String,
 
     @field:SerializedName("author")
     val author: String? = null,
@@ -14,16 +14,16 @@ data class ArticlesItem(
     val urlToImage: String? = null,
 
     @field:SerializedName("description")
-    val description: String? = null,
+    val description: String,
 
     @field:SerializedName("source")
-    val source: Source? = null,
+    val source: Source,
 
     @field:SerializedName("title")
-    val title: String? = null,
+    val title: String,
 
     @field:SerializedName("url")
-    val url: String? = null,
+    val url: String,
 
     @field:SerializedName("content")
     val content: String? = null

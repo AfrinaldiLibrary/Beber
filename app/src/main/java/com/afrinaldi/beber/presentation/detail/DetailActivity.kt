@@ -2,17 +2,25 @@ package com.afrinaldi.beber.presentation.detail
 
 import android.os.Build.VERSION
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.afrinaldi.beber.R
 import com.afrinaldi.beber.core.domain.model.News
 import com.afrinaldi.beber.core.utils.DATA
+import com.afrinaldi.beber.core.utils.Helper
 import com.afrinaldi.beber.databinding.ActivityDetailBinding
 import com.bumptech.glide.Glide
 import eightbitlab.com.blurview.RenderScriptBlur
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
 
     private var _binding : ActivityDetailBinding? = null
     private val binding get() = _binding!!
+
+    private val detailViewModel: DetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +54,28 @@ class DetailActivity : AppCompatActivity() {
 
                 tvTitle.text = detailNews.title
                 tvAuthor.text = detailNews.author
-                tvDate.text = detailNews.date
+                tvDate.text = Helper.formatDate(detailNews.date)
                 tvDetail.text = detailNews.content
                 tvSource.text = detailNews.name
+
+                Log.e("cek image", detailNews.image)
+
+                var statusBookmark = detailNews.isBookmark
+                setStatusBookmark(statusBookmark)
+                binding.ivBookmark.setOnClickListener {
+                    statusBookmark = !statusBookmark
+                    detailViewModel.setBookmarkTourism(detailNews, statusBookmark)
+                    setStatusBookmark(statusBookmark)
+                }
             }
+        }
+    }
+
+    private fun setStatusBookmark(statusBookmark: Boolean){
+        if (statusBookmark) {
+            binding.ivBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_filled))
+        } else {
+            binding.ivBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark))
         }
     }
 }

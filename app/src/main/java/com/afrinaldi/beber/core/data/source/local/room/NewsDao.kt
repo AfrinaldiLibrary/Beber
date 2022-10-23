@@ -13,12 +13,12 @@ interface NewsDao {
     @Query("SELECT * FROM news")
     fun getAllNews(): Flow<List<NewsEntity>>
 
-    @Query("SELECT * FROM news WHERE isFavorite = 1")
-    fun getFavoriteNews(): Flow<List<NewsEntity>>
+    @Query("SELECT * FROM news where isBookmark = 1")
+    fun getBookmarkNews(): Flow<List<NewsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNews(news: List<NewsEntity>)
 
     @Update
-    fun updateFavoriteNews(news: NewsEntity)
+    fun updateBookmarkNews(news: NewsEntity)
 }

@@ -20,33 +20,33 @@ class NewsRepository(
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override fun loadFromDB(): Flow<List<News>> {
                 return localDataSource.getAllNews().map {
-                    DataMapper.mapEntityToDomain(it)
+                    DataMapper.mapEntitiesToDomain(it)
                 }
             }
 
             override fun shouldFetch(data: List<News>?): Boolean =
-//                data == null || data.isEmpty()
-                true
+                data == null || data.isEmpty()
+//                true
             
-            override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem?>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
                 remoteDataSource.getAllNews()
 
-            override suspend fun saveCallResult(data: List<ArticlesItem?>) {
+            override suspend fun saveCallResult(data: List<ArticlesItem>) {
                 val newsList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
 
-    override fun getFavoriteNews(): Flow<List<News>> {
-        return localDataSource.getFavoriteNews().map {
-            DataMapper.mapEntityToDomain(it)
+    override fun getBookmarkNews(): Flow<List<News>> {
+        return localDataSource.getBookmarkNews().map {
+            DataMapper.mapEntitiesToDomain(it)
         }
     }
 
-    override fun setFavoriteNews(news: News, isFavorite: Boolean) {
+    override fun setBookmarkNews(news: News, isBookmark: Boolean) {
         val newsEntity = DataMapper.mapDomainToEntity(news)
         appExecutors.diskIO().execute {
-            localDataSource.setFavoriteNews(newsEntity, isFavorite)
+            localDataSource.setBookmarkNews(newsEntity, isBookmark)
         }
     }
 }

@@ -3,6 +3,7 @@ package com.afrinaldi.beber.core.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.afrinaldi.beber.R
@@ -15,7 +16,8 @@ import eightbitlab.com.blurview.RenderScriptBlur
 
 class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>() {
     private var listData = emptyList<News>()
-    var onItemClick: ((News) -> Unit)? = null
+    var onIntentClicked: ((News) -> Unit)? = null
+    var onBookmarkClicked: ((News, ItemRecommendationBinding) -> Unit)? = null
 
     fun setData(newListData: List<News>?) {
         if (newListData == null) return
@@ -44,6 +46,8 @@ class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>
                     .into(ivMain)
                 tvTitle.text = data.title
                 tvDate.text = Helper.formatDate(data.date)
+
+                ivBookmark.setImageDrawable(ContextCompat.getDrawable(itemView.context, Helper.setStatusBookmark(data.isBookmark)))
             }
 
             binding.blurLayoutBg.setupWith(binding.root, RenderScriptBlur(itemView.context))
@@ -52,7 +56,10 @@ class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>
 
         init {
             binding.root.setOnClickListener {
-                onItemClick?.invoke(listData[adapterPosition])
+                onIntentClicked?.invoke(listData[adapterPosition])
+            }
+            binding.ivBookmark.setOnClickListener {
+                onBookmarkClicked?.invoke(listData[adapterPosition], binding)
             }
         }
     }

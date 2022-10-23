@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.afrinaldi.beber.core.data.Resource
 import com.afrinaldi.beber.core.ui.BreakingNewsAdapter
 import com.afrinaldi.beber.core.utils.DATA
+import com.afrinaldi.beber.core.utils.Helper
 import com.afrinaldi.beber.databinding.FragmentHomeBinding
 import com.afrinaldi.beber.presentation.detail.DetailActivity
 import com.afrinaldi.beber.presentation.detail.DetailViewModel
@@ -36,11 +38,18 @@ class HomeFragment : Fragment() {
 
         if (activity != null) {
             val breakingNewsAdapter = BreakingNewsAdapter()
-            breakingNewsAdapter.onItemClick = { news ->
+            breakingNewsAdapter.onIntentClicked = { news ->
                 Intent(activity, DetailActivity::class.java).also {
                     it.putExtra(DATA, news)
                     startActivity(it)
                 }
+            }
+
+            breakingNewsAdapter.onBookmarkClicked = { news, item ->
+                var statusBookmark = news.isBookmark
+                statusBookmark = !statusBookmark
+                detailViewModel.setBookmarkTourism(news, statusBookmark)
+                item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(requireContext(), Helper.setStatusBookmark(statusBookmark)))
             }
 
             homeViewModel.news.observe(viewLifecycleOwner) { news ->

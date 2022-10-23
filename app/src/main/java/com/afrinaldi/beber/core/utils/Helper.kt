@@ -1,5 +1,7 @@
 package com.afrinaldi.beber.core.utils
 
+import androidx.core.content.ContextCompat
+import com.afrinaldi.beber.R
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -23,5 +25,13 @@ object Helper {
             ex.printStackTrace()
         }
         return targetDate
+    }
+
+    fun setStatusBookmark(statusBookmark: Boolean) : Int{
+        return if (statusBookmark) {
+            R.drawable.ic_bookmark_filled
+        } else {
+            R.drawable.ic_bookmark
+        }
     }
 }

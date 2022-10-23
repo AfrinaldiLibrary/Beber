@@ -61,21 +61,13 @@ class DetailActivity : AppCompatActivity() {
                 Log.e("cek image", detailNews.image)
 
                 var statusBookmark = detailNews.isBookmark
-                setStatusBookmark(statusBookmark)
+                ivBookmark.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, Helper.setStatusBookmark(statusBookmark)))
                 binding.ivBookmark.setOnClickListener {
                     statusBookmark = !statusBookmark
                     detailViewModel.setBookmarkTourism(detailNews, statusBookmark)
-                    setStatusBookmark(statusBookmark)
+                    ivBookmark.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, Helper.setStatusBookmark(statusBookmark)))
                 }
             }
-        }
-    }
-
-    private fun setStatusBookmark(statusBookmark: Boolean){
-        if (statusBookmark) {
-            binding.ivBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark_filled))
-        } else {
-            binding.ivBookmark.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_bookmark))
         }
     }
 }

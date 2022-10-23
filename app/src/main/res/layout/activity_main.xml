@@ -27,6 +27,7 @@
         android:layout_marginStart="0dp"
         android:paddingBottom="8dp"
         android:paddingHorizontal="16dp"
+        android:background="@color/white"
         app:itemBackground="@drawable/nav_indicator"
         app:menu="@menu/bottom_menu"
         app:itemIconTint="@color/bottom_nav_color"

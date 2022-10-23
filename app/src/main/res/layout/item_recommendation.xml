@@ -36,19 +36,27 @@
             android:background="@drawable/shape_corner4"
             android:backgroundTint="#331E1E1E"
             android:scaleType="center"
-            android:src="@drawable/ic_bookmark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
+        <androidx.cardview.widget.CardView
             android:id="@+id/blurLayout"
             android:layout_width="0dp"
             android:layout_height="138dp"
-            android:background="@drawable/shape_corner16"
-            android:backgroundTint="#4D272727"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <eightbitlab.com.blurview.BlurView
+                android:id="@+id/blurLayoutBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:blurOverlayColor="#66131C23"/>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_title"

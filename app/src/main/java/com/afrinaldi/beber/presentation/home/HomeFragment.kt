@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.afrinaldi.beber.core.data.Resource
+import com.afrinaldi.beber.core.domain.model.News
 import com.afrinaldi.beber.core.ui.BreakingNewsAdapter
 import com.afrinaldi.beber.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -31,6 +32,9 @@ class HomeFragment : Fragment() {
 
         if (activity != null) {
             val breakingNewsAdapter = BreakingNewsAdapter()
+            breakingNewsAdapter.onItemClick = {
+
+            }
 
             homeViewModel.news.observe(viewLifecycleOwner) { news ->
                 if (news != null) {

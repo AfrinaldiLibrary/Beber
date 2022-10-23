@@ -8,9 +8,12 @@ import com.afrinaldi.beber.R
 import com.afrinaldi.beber.core.domain.model.News
 import com.afrinaldi.beber.databinding.ItemRecommendationBinding
 import com.bumptech.glide.Glide
+import eightbitlab.com.blurview.RenderEffectBlur
+import eightbitlab.com.blurview.RenderScriptBlur
 
 class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>() {
     private var listData = ArrayList<News>()
+    var onItemClick: ((News) -> Unit)? = null
 
     fun setData(newListData: List<News>?) {
         if (newListData == null) return
@@ -38,6 +41,15 @@ class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>
                     .into(ivMain)
                 tvTitle.text = data.title
                 tvDate.text = data.date
+            }
+
+            binding.blurLayoutBg.setupWith(binding.root, RenderScriptBlur(itemView.context))
+                .setBlurRadius(8f)
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(listData[adapterPosition])
             }
         }
     }

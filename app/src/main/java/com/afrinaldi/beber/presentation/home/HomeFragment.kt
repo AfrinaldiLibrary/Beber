@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.afrinaldi.beber.core.data.Resource
-import com.afrinaldi.beber.core.domain.model.News
 import com.afrinaldi.beber.core.ui.BreakingNewsAdapter
 import com.afrinaldi.beber.core.utils.DATA
 import com.afrinaldi.beber.databinding.FragmentHomeBinding
 import com.afrinaldi.beber.presentation.detail.DetailActivity
+import com.afrinaldi.beber.presentation.detail.DetailViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -21,6 +21,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val homeViewModel: HomeViewModel by viewModel()
+    private val detailViewModel: DetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

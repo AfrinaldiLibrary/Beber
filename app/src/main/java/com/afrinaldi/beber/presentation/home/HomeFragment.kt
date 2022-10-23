@@ -1,5 +1,6 @@
 package com.afrinaldi.beber.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +10,9 @@ import android.widget.Toast
 import com.afrinaldi.beber.core.data.Resource
 import com.afrinaldi.beber.core.domain.model.News
 import com.afrinaldi.beber.core.ui.BreakingNewsAdapter
+import com.afrinaldi.beber.core.utils.DATA
 import com.afrinaldi.beber.databinding.FragmentHomeBinding
+import com.afrinaldi.beber.presentation.detail.DetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -32,8 +35,11 @@ class HomeFragment : Fragment() {
 
         if (activity != null) {
             val breakingNewsAdapter = BreakingNewsAdapter()
-            breakingNewsAdapter.onItemClick = {
-
+            breakingNewsAdapter.onItemClick = { news ->
+                Intent(activity, DetailActivity::class.java).also {
+                    it.putExtra(DATA, news)
+                    startActivity(it)
+                }
             }
 
             homeViewModel.news.observe(viewLifecycleOwner) { news ->

@@ -30,6 +30,7 @@
         android:background="@color/white"
         app:itemBackground="@drawable/nav_indicator"
         app:menu="@menu/bottom_menu"
+        app:labelVisibilityMode="selected"
         app:itemIconTint="@color/bottom_nav_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

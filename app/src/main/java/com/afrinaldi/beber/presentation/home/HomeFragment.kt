@@ -63,14 +63,12 @@ class HomeFragment : Fragment() {
                                 .show()
                         }
                         is Resource.Loading -> {}
-
                     }
                 }
             }
 
             binding.rvBreakingNews.setHasFixedSize(true)
             binding.rvBreakingNews.adapter = breakingNewsAdapter
-
         }
     }
 

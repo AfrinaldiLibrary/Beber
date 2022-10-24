@@ -5,4 +5,8 @@
     <string name="home">Home</string>
     <string name="bookmark">Bookmark</string>
     <string name="settings">Settings</string>
+    <string name="introduction_name">Hello, Afrinaldi</string>
+    <string name="online">Online</string>
+    <string name="breaking_news">Breaking News</string>
+    <string name="data_not_found">Belum ada data</string>
 </resources>

@@ -34,4 +34,12 @@ object Helper {
             R.drawable.ic_bookmark
         }
     }
+
+    fun setStatusBookmarkItem(statusBookmark: Boolean) : Int{
+        return if (statusBookmark) {
+            R.color.blue
+        } else {
+            R.color.grey
+        }
+    }
 }

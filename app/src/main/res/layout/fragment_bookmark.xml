@@ -7,14 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".presentation.bookmark.BookmarkFragment">
 
+    <include
+        android:id="@+id/empty_layout"
+        layout="@layout/empty_layout"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_breaking_news"
+        android:id="@+id/rv_bookmark"
         android:layout_width="0dp"
+        android:elevation="1dp"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_news" />
+        tools:listitem="@layout/item_news"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.afrinaldi.beber.core.ui.BreakingNewsAdapter
+import com.afrinaldi.beber.core.ui.NewsAdapter
 import com.afrinaldi.beber.core.utils.DATA
 import com.afrinaldi.beber.core.utils.Helper
 import com.afrinaldi.beber.databinding.FragmentBookmarkBinding
@@ -34,7 +34,7 @@ class BookmarkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null){
-            val newsAdapter = BreakingNewsAdapter()
+            val newsAdapter = NewsAdapter()
             newsAdapter.onIntentClicked = { news ->
                 Intent(activity, DetailActivity::class.java).also {
                     it.putExtra(DATA, news)
@@ -46,16 +46,15 @@ class BookmarkFragment : Fragment() {
                 var statusBookmark = news.isBookmark
                 statusBookmark = !statusBookmark
                 detailViewModel.setBookmarkTourism(news, statusBookmark)
-                item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(requireContext(), Helper.setStatusBookmark(statusBookmark)))
+                item.ivBookmark.background.setTint(ContextCompat.getColor(requireContext(), Helper.setStatusBookmarkItem(news.isBookmark)))
             }
+
+            binding.rvBookmark.setHasFixedSize(true)
 
             bookmarkViewModel.bookmarkNews.observe(viewLifecycleOwner) {
+                binding.emptyLayout.root.visibility = if (it.isNotEmpty()) View.GONE else View.VISIBLE
                 newsAdapter.setData(it)
-            }
-
-            binding.rvBreakingNews.apply {
-                setHasFixedSize(true)
-                adapter = newsAdapter
+                binding.rvBookmark.adapter = newsAdapter
             }
         }
     }

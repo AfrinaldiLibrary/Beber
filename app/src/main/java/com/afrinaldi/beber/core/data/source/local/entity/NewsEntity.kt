@@ -10,6 +10,9 @@ data class NewsEntity(
     @ColumnInfo(name = "id")
     val id: Int = 0,
 
+    @ColumnInfo(name = "category")
+    var category: String,
+
     @ColumnInfo(name = "name")
     var name: String,
 

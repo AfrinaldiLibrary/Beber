@@ -6,8 +6,7 @@ import com.afrinaldi.beber.core.data.source.remote.network.ApiResponse
 import com.afrinaldi.beber.core.data.source.remote.response.ArticlesItem
 import com.afrinaldi.beber.core.domain.model.News
 import com.afrinaldi.beber.core.domain.repository.INewsRepository
-import com.afrinaldi.beber.core.utils.AppExecutors
-import com.afrinaldi.beber.core.utils.DataMapper
+import com.afrinaldi.beber.core.utils.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -19,7 +18,7 @@ class NewsRepository(
     override fun getAllNews(): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getAllNews().map {
+                return localDataSource.getBreakingNews().map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -29,10 +28,10 @@ class NewsRepository(
                 true
             
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
-                remoteDataSource.getAllNews()
+                remoteDataSource.getBreakingNews()
 
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
-                val newsList = DataMapper.mapResponsesToEntities(data)
+                val newsList = DataMapper.mapResponsesToEntities(data, BREAKING)
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
@@ -53,7 +52,7 @@ class NewsRepository(
     override fun getSportNews(): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getAllNews().map {
+                return localDataSource.getSportNews().map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -66,7 +65,7 @@ class NewsRepository(
                 remoteDataSource.getSportNews()
 
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
-                val newsList = DataMapper.mapResponsesToEntities(data)
+                val newsList = DataMapper.mapResponsesToEntities(data, SPORTS)
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
@@ -74,7 +73,7 @@ class NewsRepository(
     override fun getTechNews(): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getAllNews().map {
+                return localDataSource.getTechNews().map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -87,7 +86,7 @@ class NewsRepository(
                 remoteDataSource.getTechNews()
 
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
-                val newsList = DataMapper.mapResponsesToEntities(data)
+                val newsList = DataMapper.mapResponsesToEntities(data, TECH)
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
@@ -95,7 +94,7 @@ class NewsRepository(
     override fun getBusinessNews(): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getAllNews().map {
+                return localDataSource.getBusinessNews().map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -108,7 +107,7 @@ class NewsRepository(
                 remoteDataSource.getBusinessNews()
 
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
-                val newsList = DataMapper.mapResponsesToEntities(data)
+                val newsList = DataMapper.mapResponsesToEntities(data, BUSINESS)
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
@@ -116,7 +115,7 @@ class NewsRepository(
     override fun getHealthNews(): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getAllNews().map {
+                return localDataSource.getHealthNews().map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -129,7 +128,7 @@ class NewsRepository(
                 remoteDataSource.getHealthNews()
 
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
-                val newsList = DataMapper.mapResponsesToEntities(data)
+                val newsList = DataMapper.mapResponsesToEntities(data, HEALTH)
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()

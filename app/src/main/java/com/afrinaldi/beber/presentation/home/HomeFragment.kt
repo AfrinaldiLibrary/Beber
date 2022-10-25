@@ -2,17 +2,12 @@ package com.afrinaldi.beber.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
-import android.widget.ScrollView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
 import androidx.core.view.updatePadding
 import com.afrinaldi.beber.core.data.Resource
 import com.afrinaldi.beber.core.ui.BreakingNewsAdapter
@@ -46,118 +41,128 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val breakingNewsAdapter = BreakingNewsAdapter()
-            breakingNewsAdapter.onIntentClicked = { news ->
-                Intent(activity, DetailActivity::class.java).also {
-                    it.putExtra(DATA, news)
-                    startActivity(it)
+            setHeaderSticky()
+            showBreakingNews()
+            showCategoryNews()
+        }
+    }
+
+    private fun setHeaderSticky() {
+        binding.root.setScrollViewListener(object: IScrollViewListener{
+            override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
+                if(binding.root.isHeaderSticky) {
+                    binding.tabs.updatePadding(top = 100)
+                } else {
+                    binding.tabs.updatePadding(top = 0)
                 }
             }
+        })
+    }
 
-            breakingNewsAdapter.onBookmarkClicked = { news, item ->
-                var statusBookmark = news.isBookmark
-                statusBookmark = !statusBookmark
-                detailViewModel.setBookmarkTourism(news, statusBookmark)
-                item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(requireContext(), Helper.setStatusBookmark(statusBookmark)))
+    private fun showBreakingNews() {
+        val breakingNewsAdapter = BreakingNewsAdapter()
+        breakingNewsAdapter.onIntentClicked = { news ->
+            Intent(activity, DetailActivity::class.java).also {
+                it.putExtra(DATA, news)
+                startActivity(it)
             }
+        }
 
-            homeViewModel.news.observe(viewLifecycleOwner) { news ->
-                if (news != null) {
-                    when (news) {
-                        is Resource.Success -> {
-                            breakingNewsAdapter.setData(news.data)
-                        }
-                        is Resource.Error -> {
-                            Toast.makeText(requireContext(), news.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        is Resource.Loading -> {}
+        breakingNewsAdapter.onBookmarkClicked = { news, item ->
+            var statusBookmark = news.isBookmark
+            statusBookmark = !statusBookmark
+            detailViewModel.setBookmarkTourism(news, statusBookmark)
+            item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(requireContext(), Helper.setStatusBookmark(statusBookmark)))
+        }
+
+        homeViewModel.news.observe(viewLifecycleOwner) { news ->
+            if (news != null) {
+                when (news) {
+                    is Resource.Success -> {
+                        breakingNewsAdapter.setData(news.data)
                     }
-                }
-            }
-
-            binding.rvBreakingNews.setHasFixedSize(true)
-            binding.rvBreakingNews.adapter = breakingNewsAdapter
-
-            val newsPagerAdapter = NewsPagerAdapter()
-            binding.viewPager.adapter = newsPagerAdapter
-
-            binding.root.setScrollViewListener(object: IScrollViewListener{
-                override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
-                    if(binding.root.isHeaderSticky) {
-                        binding.tabs.updatePadding(top = 100)
-                    } else {
-                        binding.tabs.updatePadding(top = 0)
+                    is Resource.Error -> {
+                        Toast.makeText(requireContext(), news.message, Toast.LENGTH_SHORT)
+                            .show()
                     }
-                }
-            })
-
-            TabLayoutMediator(binding.tabs, binding.viewPager) { category, position ->
-                when(position) {
-                    0 -> category.text = "Olahraga"
-                    1 -> category.text = "Teknologi"
-                    2 -> category.text = "Bisnis"
-                    3 -> category.text = "Kesehatan"
-                }
-            }.attach()
-
-            homeViewModel.sportNews.observe(viewLifecycleOwner){
-                if (it != null) {
-                    when (it) {
-                        is Resource.Success -> {
-                            newsPagerAdapter.setData(NewsPagerAdapter.Category.SPORT, it.data)
-                        }
-                        is Resource.Error -> {
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        is Resource.Loading -> {}
-                    }
+                    is Resource.Loading -> {}
                 }
             }
+        }
 
-            homeViewModel.techNews.observe(viewLifecycleOwner){
-                if (it != null) {
-                    when (it) {
-                        is Resource.Success -> {
-                            newsPagerAdapter.setData(NewsPagerAdapter.Category.TECH, it.data)
-                        }
-                        is Resource.Error -> {
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        is Resource.Loading -> {}
-                    }
-                }
+        binding.rvBreakingNews.setHasFixedSize(true)
+        binding.rvBreakingNews.adapter = breakingNewsAdapter
+    }
+
+    private fun showCategoryNews() {
+        val newsPagerAdapter = NewsPagerAdapter(detailViewModel)
+        binding.viewPager.adapter = newsPagerAdapter
+
+        TabLayoutMediator(binding.tabs, binding.viewPager) { category, position ->
+            when(position) {
+                0 -> category.text = "Olahraga"
+                1 -> category.text = "Teknologi"
+                2 -> category.text = "Bisnis"
+                3 -> category.text = "Kesehatan"
             }
+        }.attach()
 
-            homeViewModel.businessNews.observe(viewLifecycleOwner){
-                if (it != null) {
-                    when (it) {
-                        is Resource.Success -> {
-                            newsPagerAdapter.setData(NewsPagerAdapter.Category.BUSINESS, it.data)
-                        }
-                        is Resource.Error -> {
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        is Resource.Loading -> {}
-                    }
-                }
-            }
+        homeViewModel.sportNews.observe(viewLifecycleOwner){ sport ->
+            if (sport != null) {
+                when (sport) {
+                    is Resource.Success -> {
+                        newsPagerAdapter.setData(NewsPagerAdapter.Category.SPORT, sport.data)
 
-            homeViewModel.healthNews.observe(viewLifecycleOwner){
-                if (it != null) {
-                    when (it) {
-                        is Resource.Success -> {
-                            newsPagerAdapter.setData(NewsPagerAdapter.Category.HEALTH, it.data)
+                        homeViewModel.techNews.observe(viewLifecycleOwner){ tech ->
+                            if (tech != null) {
+                                when (tech) {
+                                    is Resource.Success -> {
+                                        newsPagerAdapter.setData(NewsPagerAdapter.Category.TECH, tech.data)
+
+                                        homeViewModel.businessNews.observe(viewLifecycleOwner){ business ->
+                                            if (business != null) {
+                                                when (business) {
+                                                    is Resource.Success -> {
+                                                        newsPagerAdapter.setData(NewsPagerAdapter.Category.BUSINESS, business.data)
+
+                                                        homeViewModel.healthNews.observe(viewLifecycleOwner){ health ->
+                                                            if (health != null) {
+                                                                when (health) {
+                                                                    is Resource.Success -> {
+                                                                        newsPagerAdapter.setData(NewsPagerAdapter.Category.HEALTH, health.data)
+                                                                    }
+                                                                    is Resource.Error -> {
+                                                                        Toast.makeText(requireContext(), health.message, Toast.LENGTH_SHORT)
+                                                                            .show()
+                                                                    }
+                                                                    is Resource.Loading -> {}
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    is Resource.Error -> {
+                                                        Toast.makeText(requireContext(), business.message, Toast.LENGTH_SHORT)
+                                                            .show()
+                                                    }
+                                                    is Resource.Loading -> {}
+                                                }
+                                            }
+                                        }
+                                    }
+                                    is Resource.Error -> {
+                                        Toast.makeText(requireContext(), tech.message, Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                    is Resource.Loading -> {}
+                                }
+                            }
                         }
-                        is Resource.Error -> {
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                        is Resource.Loading -> {}
                     }
+                    is Resource.Error -> {
+                        Toast.makeText(requireContext(), sport.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    is Resource.Loading -> {}
                 }
             }
         }

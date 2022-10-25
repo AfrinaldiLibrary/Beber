@@ -3,13 +3,16 @@ package com.afrinaldi.beber.core.utils
 import com.afrinaldi.beber.core.data.source.local.entity.NewsEntity
 import com.afrinaldi.beber.core.data.source.remote.response.ArticlesItem
 import com.afrinaldi.beber.core.domain.model.News
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 object DataMapper {
-    fun mapResponsesToEntities(input: List<ArticlesItem>): List<NewsEntity> {
+    fun mapResponsesToEntities(input: List<ArticlesItem>, category: String): List<NewsEntity> {
         val newsList = ArrayList<NewsEntity>()
         input.map {
             val news = NewsEntity(
                 id = 0,
+                category = category,
                 name = it.source.name,
                 title = it.title,
                 date = it.publishedAt,
@@ -28,6 +31,7 @@ object DataMapper {
         input.map {
             News(
                 id = it.id,
+                category = it.category,
                 name = it.name,
                 title = it.title,
                 date = it.date,
@@ -42,6 +46,7 @@ object DataMapper {
     fun mapDomainToEntity(input: News) =
         NewsEntity(
             id = input.id,
+            category = input.category,
             name = input.name,
             title = input.title,
             date = input.date,

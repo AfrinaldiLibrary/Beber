@@ -1,13 +1,19 @@
 package com.afrinaldi.beber.core.ui
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.afrinaldi.beber.R
 import com.afrinaldi.beber.core.domain.model.News
+import com.afrinaldi.beber.core.utils.DATA
+import com.afrinaldi.beber.core.utils.Helper
+import com.afrinaldi.beber.presentation.detail.DetailActivity
+import com.afrinaldi.beber.presentation.detail.DetailViewModel
 
-class NewsPagerAdapter : RecyclerView.Adapter<NewsPagerAdapter.ViewHolder>() {
+class NewsPagerAdapter(private val detailViewModel: DetailViewModel) : RecyclerView.Adapter<NewsPagerAdapter.ViewHolder>() {
     private val categoryMap = LinkedHashMap<Category, List<News>>()
 
     fun setData(key: Category, newListData: List<News>?) {
@@ -33,24 +39,81 @@ class NewsPagerAdapter : RecyclerView.Adapter<NewsPagerAdapter.ViewHolder>() {
             Category.SPORT -> {
                 val adapter = NewsAdapter()
                 adapter.setData(category)
+                adapter.onIntentClicked = { news ->
+                    Intent(holder.itemView.context, DetailActivity::class.java).also {
+                        it.putExtra(DATA, news)
+                        holder.itemView.context.startActivity(it)
+                    }
+                }
+
+                adapter.onBookmarkClicked = { news, item ->
+                    var statusBookmark = news.isBookmark
+                    statusBookmark = !statusBookmark
+                    detailViewModel.setBookmarkTourism(news, statusBookmark)
+                    item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, Helper.setStatusBookmark(statusBookmark)))
+                }
+
                 holder.rvNews.adapter = adapter
             }
 
             Category.TECH -> {
                 val adapter = NewsAdapter()
                 adapter.setData(category)
+                adapter.onIntentClicked = { news ->
+                    Intent(holder.itemView.context, DetailActivity::class.java).also {
+                        it.putExtra(DATA, news)
+                        holder.itemView.context.startActivity(it)
+                    }
+                }
+
+                adapter.onBookmarkClicked = { news, item ->
+                    var statusBookmark = news.isBookmark
+                    statusBookmark = !statusBookmark
+                    detailViewModel.setBookmarkTourism(news, statusBookmark)
+                    item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, Helper.setStatusBookmark(statusBookmark)))
+                }
+
                 holder.rvNews.adapter = adapter
             }
 
             Category.BUSINESS -> {
                 val adapter = NewsAdapter()
                 adapter.setData(category)
+                adapter.onIntentClicked = { news ->
+                    Intent(holder.itemView.context, DetailActivity::class.java).also {
+                        it.putExtra(DATA, news)
+                        holder.itemView.context.startActivity(it)
+                    }
+                }
+
+                adapter.onBookmarkClicked = { news, item ->
+                    var statusBookmark = news.isBookmark
+                    statusBookmark = !statusBookmark
+                    detailViewModel.setBookmarkTourism(news, statusBookmark)
+                    item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, Helper.setStatusBookmark(statusBookmark)))
+                }
+
                 holder.rvNews.adapter = adapter
             }
 
             Category.HEALTH -> {
                 val adapter = NewsAdapter()
                 adapter.setData(category)
+
+                adapter.onIntentClicked = { news ->
+                    Intent(holder.itemView.context, DetailActivity::class.java).also {
+                        it.putExtra(DATA, news)
+                        holder.itemView.context.startActivity(it)
+                    }
+                }
+
+                adapter.onBookmarkClicked = { news, item ->
+                    var statusBookmark = news.isBookmark
+                    statusBookmark = !statusBookmark
+                    detailViewModel.setBookmarkTourism(news, statusBookmark)
+                    item.ivBookmark.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, Helper.setStatusBookmark(statusBookmark)))
+                }
+
                 holder.rvNews.adapter = adapter
             }
         }

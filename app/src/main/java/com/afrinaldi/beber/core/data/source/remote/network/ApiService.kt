@@ -15,35 +15,28 @@ interface ApiService {
     @GET("top-headlines")
     suspend fun getSports(
         @Query("country") country: String = "id",
-        @Query("category") category: String?,
+        @Query("category") category: String = "sports",
         @Query("apiKey") apiKey: String = API_KEY
     ): NewsResponse
 
     @GET("top-headlines")
     suspend fun getTechnology(
         @Query("country") country: String = "id",
-        @Query("category") category: String?,
+        @Query("category") category: String = "technology",
         @Query("apiKey") apiKey: String = API_KEY
     ): NewsResponse
 
     @GET("top-headlines")
     suspend fun getBusiness(
         @Query("country") country: String = "id",
-        @Query("category") category: String?,
+        @Query("category") category: String = "business",
         @Query("apiKey") apiKey: String = API_KEY
     ): NewsResponse
 
     @GET("top-headlines")
     suspend fun getHealth(
         @Query("country") country: String = "id",
-        @Query("category") category: String?,
-        @Query("apiKey") apiKey: String = API_KEY
-    ): NewsResponse
-
-    @GET("top-headlines")
-    suspend fun getEntertainment(
-        @Query("country") country: String = "id",
-        @Query("category") category: String?,
+        @Query("category") category: String = "health",
         @Query("apiKey") apiKey: String = API_KEY
     ): NewsResponse
 

@@ -16,7 +16,7 @@ interface NewsDao {
     @Query("SELECT * FROM news where isBookmark = 1")
     fun getBookmarkNews(): Flow<List<NewsEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertNews(news: List<NewsEntity>)
 
     @Update

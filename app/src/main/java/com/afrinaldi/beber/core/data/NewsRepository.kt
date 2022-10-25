@@ -25,8 +25,8 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean =
-                data == null || data.isEmpty()
-//                true
+//                data == null || data.isEmpty()
+                true
             
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
                 remoteDataSource.getAllNews()
@@ -49,4 +49,88 @@ class NewsRepository(
             localDataSource.setBookmarkNews(newsEntity, isBookmark)
         }
     }
+
+    override fun getSportNews(): Flow<Resource<List<News>>> =
+        object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
+            override fun loadFromDB(): Flow<List<News>> {
+                return localDataSource.getAllNews().map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<News>?): Boolean =
+//                data == null || data.isEmpty()
+                true
+
+            override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
+                remoteDataSource.getSportNews()
+
+            override suspend fun saveCallResult(data: List<ArticlesItem>) {
+                val newsList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertNews(newsList)
+            }
+        }.asFlow()
+
+    override fun getTechNews(): Flow<Resource<List<News>>> =
+        object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
+            override fun loadFromDB(): Flow<List<News>> {
+                return localDataSource.getAllNews().map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<News>?): Boolean =
+//                data == null || data.isEmpty()
+                true
+
+            override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
+                remoteDataSource.getTechNews()
+
+            override suspend fun saveCallResult(data: List<ArticlesItem>) {
+                val newsList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertNews(newsList)
+            }
+        }.asFlow()
+
+    override fun getBusinessNews(): Flow<Resource<List<News>>> =
+        object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
+            override fun loadFromDB(): Flow<List<News>> {
+                return localDataSource.getAllNews().map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<News>?): Boolean =
+//                data == null || data.isEmpty()
+                true
+
+            override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
+                remoteDataSource.getBusinessNews()
+
+            override suspend fun saveCallResult(data: List<ArticlesItem>) {
+                val newsList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertNews(newsList)
+            }
+        }.asFlow()
+
+    override fun getHealthNews(): Flow<Resource<List<News>>> =
+        object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
+            override fun loadFromDB(): Flow<List<News>> {
+                return localDataSource.getAllNews().map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<News>?): Boolean =
+//                data == null || data.isEmpty()
+                true
+
+            override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
+                remoteDataSource.getHealthNews()
+
+            override suspend fun saveCallResult(data: List<ArticlesItem>) {
+                val newsList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertNews(newsList)
+            }
+        }.asFlow()
 }

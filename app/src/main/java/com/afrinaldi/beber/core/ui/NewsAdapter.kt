@@ -29,7 +29,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false))
 
-    override fun getItemCount() : Int = if (listData.size > 5) 5 else listData.size
+    override fun getItemCount() : Int = if (listData.size > 10) 10 else listData.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = listData[position]

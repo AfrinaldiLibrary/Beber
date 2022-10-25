@@ -23,6 +23,9 @@ class MyDiffUtil(
             oldList[oldItemPosition].title != newList[newItemPosition].title -> {
                 false
             }
+            oldList[oldItemPosition].isBookmark != newList[newItemPosition].isBookmark -> {
+                false
+            }
             else -> true
         }
     }

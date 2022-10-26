@@ -41,16 +41,26 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
+
+            swipeRefresh()
             setHeaderSticky()
             showBreakingNews()
             showCategoryNews()
         }
     }
 
+    private fun swipeRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            showBreakingNews()
+            showCategoryNews()
+            binding.swipeRefresh.isRefreshing = false
+        }
+    }
+
     private fun setHeaderSticky() {
-        binding.root.setScrollViewListener(object: IScrollViewListener{
+        binding.sticky.setScrollViewListener(object: IScrollViewListener{
             override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
-                if(binding.root.isHeaderSticky) {
+                if(binding.sticky.isHeaderSticky) {
                     binding.tabs.updatePadding(top = 100)
                 } else {
                     binding.tabs.updatePadding(top = 0)

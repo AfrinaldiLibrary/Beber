@@ -33,4 +33,7 @@ interface NewsDao {
 
     @Update
     fun updateBookmarkNews(news: NewsEntity)
+
+    @Query("DELETE FROM news where isBookmark = 0")
+    suspend fun deleteNews()
 }

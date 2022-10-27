@@ -21,4 +21,6 @@ class NewsInteractor(private val newsRepository: INewsRepository) : NewsUseCase 
 
     override fun getHealthNews() = newsRepository.getHealthNews()
 
+    override suspend fun deleteNews() = newsRepository.deleteNews()
+
 }

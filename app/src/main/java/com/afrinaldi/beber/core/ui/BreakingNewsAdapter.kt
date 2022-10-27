@@ -27,6 +27,10 @@ class BreakingNewsAdapter : RecyclerView.Adapter<BreakingNewsAdapter.ViewHolder>
         diffResults.dispatchUpdatesTo(this)
     }
 
+    fun clearData(){
+        listData.drop(listData.size)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recommendation, parent, false))
 

@@ -132,4 +132,8 @@ class NewsRepository(
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
+
+    override suspend fun deleteNews() {
+        localDataSource.deleteNews()
+    }
 }

@@ -18,4 +18,6 @@ interface NewsUseCase {
     fun getBusinessNews() : Flow<Resource<List<News>>>
 
     fun getHealthNews() : Flow<Resource<List<News>>>
+
+    suspend fun deleteNews()
 }

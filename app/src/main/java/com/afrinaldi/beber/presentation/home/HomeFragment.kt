@@ -2,6 +2,7 @@ package com.afrinaldi.beber.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -51,8 +51,8 @@ class HomeFragment : Fragment() {
 
     private fun swipeRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
-            showBreakingNews()
-            showCategoryNews()
+            homeViewModel.deleteNews()
+
             binding.swipeRefresh.isRefreshing = false
         }
     }
@@ -89,6 +89,7 @@ class HomeFragment : Fragment() {
             if (news != null) {
                 when (news) {
                     is Resource.Success -> {
+                        breakingNewsAdapter.clearData()
                         breakingNewsAdapter.setData(news.data)
                     }
                     is Resource.Error -> {

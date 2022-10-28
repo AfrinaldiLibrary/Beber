@@ -21,12 +21,12 @@
         android:label="fragment_bookmark"
         tools:layout="@layout/fragment_bookmark" >
         <action
-            android:id="@+id/action_bookmarkFragment_to_settingsFragment2"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_bookmarkFragment_to_aboutFragment2"
+            app:destination="@id/aboutFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/aboutFragment"
         android:name="com.afrinaldi.beber.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />

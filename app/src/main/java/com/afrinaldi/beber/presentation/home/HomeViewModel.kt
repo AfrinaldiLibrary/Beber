@@ -3,7 +3,6 @@ package com.afrinaldi.beber.presentation.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.afrinaldi.beber.core.domain.model.News
 import com.afrinaldi.beber.core.domain.usecase.NewsUseCase
 import kotlinx.coroutines.launch
 

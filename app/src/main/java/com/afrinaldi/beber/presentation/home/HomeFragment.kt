@@ -41,19 +41,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-
-            swipeRefresh()
             setHeaderSticky()
             showBreakingNews()
             showCategoryNews()
-        }
-    }
-
-    private fun swipeRefresh() {
-        binding.swipeRefresh.setOnRefreshListener {
-            homeViewModel.deleteNews()
-
-            binding.swipeRefresh.isRefreshing = false
         }
     }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.afrinaldi.beber.databinding.FragmentSettingsBinding
+import com.bumptech.glide.Glide
 
 class SettingsFragment : Fragment() {
 
@@ -22,6 +23,10 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Glide.with(this)
+            .load("https://picsum.photos/400/200?grayscale")
+            .into(binding.ivBackground)
     }
 
     override fun onDestroyView() {

@@ -21,6 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
+            android:backgroundTint="@android:color/transparent"
             tools:src="@tools:sample/avatars"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +53,7 @@
 
             <eightbitlab.com.blurview.BlurView
                 android:id="@+id/blurLayoutBg"
+                android:backgroundTint="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:blurOverlayColor="#66131C23"/>
@@ -67,6 +69,7 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="3"
+            android:backgroundTint="@android:color/transparent"
             android:text="@tools:sample/lorem/random"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="16dp"
-            android:text="14 Feb 2022"
+            android:backgroundTint="@android:color/transparent"
+            tools:text="14 Feb 2022"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

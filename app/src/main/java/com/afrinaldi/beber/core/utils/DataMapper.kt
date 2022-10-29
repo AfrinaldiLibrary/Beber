@@ -11,10 +11,9 @@ object DataMapper {
         val newsList = ArrayList<NewsEntity>()
         input.map {
             val news = NewsEntity(
-                id = 0,
+                title = it.title,
                 category = category,
                 name = it.source.name,
-                title = it.title,
                 date = it.publishedAt,
                 image = it.urlToImage ?: "https://picsum.photos/id/1/200/300",
                 content = it.content ?: "No content created",
@@ -30,10 +29,9 @@ object DataMapper {
     fun mapEntitiesToDomain(input: List<NewsEntity>): List<News> =
         input.map {
             News(
-                id = it.id,
+                title = it.title,
                 category = it.category,
                 name = it.name,
-                title = it.title,
                 date = it.date,
                 image = it.image,
                 content = it.content,
@@ -45,10 +43,9 @@ object DataMapper {
 
     fun mapDomainToEntity(input: News) =
         NewsEntity(
-            id = input.id,
+            title = input.title,
             category = input.category,
             name = input.name,
-            title = input.title,
             date = input.date,
             image = input.image,
             content = input.content,

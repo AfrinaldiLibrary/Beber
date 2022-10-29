@@ -6,18 +6,15 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "news")
 data class NewsEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "title")
+    var title: String,
 
     @ColumnInfo(name = "category")
     var category: String,
 
     @ColumnInfo(name = "name")
     var name: String,
-
-    @ColumnInfo(name = "title")
-    var title: String,
 
     @ColumnInfo(name = "date")
     var date: String,

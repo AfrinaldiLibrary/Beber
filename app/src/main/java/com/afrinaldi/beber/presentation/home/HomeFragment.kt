@@ -41,6 +41,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
+
+            binding.textView.setOnClickListener {
+                homeViewModel.deleteNews()
+                Log.e("cek", homeViewModel.news.value?.data.toString())
+                homeViewModel.news.observe(viewLifecycleOwner){
+                    Log.e("data", it.data.toString())
+                }
+            }
+
             setHeaderSticky()
             showBreakingNews()
             showCategoryNews()

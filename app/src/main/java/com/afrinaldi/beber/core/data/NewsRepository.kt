@@ -1,5 +1,6 @@
 package com.afrinaldi.beber.core.data
 
+import android.util.Log
 import com.afrinaldi.beber.core.data.source.local.LocalDataSource
 import com.afrinaldi.beber.core.data.source.remote.RemoteDataSource
 import com.afrinaldi.beber.core.data.source.remote.network.ApiResponse
@@ -19,6 +20,7 @@ class NewsRepository(
         object : NetworkBoundResource<List<News>, List<ArticlesItem>>() {
             override fun loadFromDB(): Flow<List<News>> {
                 return localDataSource.getBreakingNews().map {
+                    Log.e("toDomain", it.toString())
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
@@ -33,6 +35,7 @@ class NewsRepository(
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
                 val newsList = DataMapper.mapResponsesToEntities(data, BREAKING)
                 localDataSource.insertNews(newsList)
+                Log.e("toEntities", newsList.toString())
             }
         }.asFlow()
 

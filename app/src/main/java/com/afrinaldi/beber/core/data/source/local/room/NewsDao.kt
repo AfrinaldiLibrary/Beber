@@ -10,19 +10,19 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
-    @Query("SELECT * FROM news where category = 'Breaking'")
+    @Query("SELECT * FROM news where category = 'Breaking' ORDER BY date DESC")
     fun getBreakingNews(): Flow<List<NewsEntity>>
 
-    @Query("SELECT * FROM news where category = 'sports'")
+    @Query("SELECT * FROM news where category = 'sports' ORDER BY date DESC")
     fun getSportNews(): Flow<List<NewsEntity>>
 
-    @Query("SELECT * FROM news where category = 'technology'")
+    @Query("SELECT * FROM news where category = 'technology' ORDER BY date DESC")
     fun getTechNews(): Flow<List<NewsEntity>>
 
-    @Query("SELECT * FROM news where category = 'business'")
+    @Query("SELECT * FROM news where category = 'business' ORDER BY date DESC")
     fun getBusinessNews(): Flow<List<NewsEntity>>
 
-    @Query("SELECT * FROM news where category = 'health'")
+    @Query("SELECT * FROM news where category = 'health' ORDER BY date DESC")
     fun getHealthNews(): Flow<List<NewsEntity>>
 
     @Query("SELECT * FROM news where isBookmark = 1")

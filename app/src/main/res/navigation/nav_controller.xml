@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/bookmarkFragment"
-        android:name="com.afrinaldi.beber.presentation.bookmark.BookmarkFragment"
+        android:name="com.afrinaldi.bookmark.bookmark.BookmarkFragment"
         android:label="fragment_bookmark"
         tools:layout="@layout/fragment_bookmark" >
         <action

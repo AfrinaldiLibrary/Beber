@@ -1,4 +1,4 @@
-package com.afrinaldi.beber.presentation.bookmark
+package com.afrinaldi.bookmark.bookmark
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,10 +10,12 @@ import androidx.core.content.ContextCompat
 import com.afrinaldi.beber.databinding.FragmentBookmarkBinding
 import com.afrinaldi.beber.presentation.detail.DetailActivity
 import com.afrinaldi.beber.presentation.detail.DetailViewModel
+import com.afrinaldi.bookmark.di.bookmarkModule
 import com.afrinaldi.core.ui.NewsAdapter
 import com.afrinaldi.core.utils.DATA
 import com.afrinaldi.core.utils.Helper
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class BookmarkFragment : Fragment() {
 
@@ -32,6 +34,7 @@ class BookmarkFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            loadKoinModules(bookmarkModule)
         super.onViewCreated(view, savedInstanceState)
         if (activity != null){
             val newsAdapter = NewsAdapter()

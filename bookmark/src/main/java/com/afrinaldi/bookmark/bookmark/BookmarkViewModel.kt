@@ -1,4 +1,4 @@
-package com.afrinaldi.beber.presentation.bookmark
+package com.afrinaldi.bookmark.bookmark
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

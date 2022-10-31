@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.afrinaldi.beber.core.ui.NewsAdapter
-import com.afrinaldi.beber.core.utils.DATA
-import com.afrinaldi.beber.core.utils.Helper
 import com.afrinaldi.beber.databinding.FragmentBookmarkBinding
 import com.afrinaldi.beber.presentation.detail.DetailActivity
 import com.afrinaldi.beber.presentation.detail.DetailViewModel
+import com.afrinaldi.core.ui.NewsAdapter
+import com.afrinaldi.core.utils.DATA
+import com.afrinaldi.core.utils.Helper
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class BookmarkFragment : Fragment() {

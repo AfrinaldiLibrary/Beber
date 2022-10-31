@@ -3,14 +3,12 @@ package com.afrinaldi.beber.presentation.detail
 import android.os.Build.VERSION
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.afrinaldi.beber.R
-import com.afrinaldi.beber.core.domain.model.News
-import com.afrinaldi.beber.core.utils.DATA
-import com.afrinaldi.beber.core.utils.Helper
 import com.afrinaldi.beber.databinding.ActivityDetailBinding
+import com.afrinaldi.core.domain.model.News
+import com.afrinaldi.core.utils.DATA
+import com.afrinaldi.core.utils.Helper
 import com.bumptech.glide.Glide
 import eightbitlab.com.blurview.RenderScriptBlur
 import org.koin.android.viewmodel.ext.android.viewModel

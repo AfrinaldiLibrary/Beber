@@ -39,11 +39,11 @@ class HomeFragment : Fragment() {
 
         if (activity != null) {
 
-            binding.textView.setOnClickListener {
-                homeViewModel.deleteNews()
-                showBreakingNews()
-                showCategoryNews()
-            }
+//            binding.textView.setOnClickListener {
+//                homeViewModel.deleteNews()
+//                showBreakingNews()
+//                showCategoryNews()
+//            }
 
             setHeaderSticky()
             showBreakingNews()
@@ -87,10 +87,11 @@ class HomeFragment : Fragment() {
                         breakingNewsAdapter.setData(news.data)
                     }
                     is com.afrinaldi.core.data.Resource.Error -> {
+                        binding.loadingLayout.root.visibility = View.GONE
                         Toast.makeText(requireContext(), news.message, Toast.LENGTH_SHORT)
                             .show()
                     }
-                    is com.afrinaldi.core.data.Resource.Loading -> {}
+                    is com.afrinaldi.core.data.Resource.Loading -> { binding.loadingLayout.root.visibility = View.VISIBLE }
                 }
             }
         }
@@ -116,59 +117,67 @@ class HomeFragment : Fragment() {
             if (sport != null) {
                 when (sport) {
                     is com.afrinaldi.core.data.Resource.Success -> {
+                        binding.loadingLayout.root.visibility = View.GONE
                         newsPagerAdapter.setData(NewsPagerAdapter.Category.SPORT, sport.data)
 
                         homeViewModel.techNews.observe(viewLifecycleOwner){ tech ->
                             if (tech != null) {
                                 when (tech) {
                                     is com.afrinaldi.core.data.Resource.Success -> {
+                                        binding.loadingLayout.root.visibility = View.GONE
                                         newsPagerAdapter.setData(NewsPagerAdapter.Category.TECH, tech.data)
 
                                         homeViewModel.businessNews.observe(viewLifecycleOwner){ business ->
                                             if (business != null) {
                                                 when (business) {
                                                     is com.afrinaldi.core.data.Resource.Success -> {
+                                                        binding.loadingLayout.root.visibility = View.GONE
                                                         newsPagerAdapter.setData(NewsPagerAdapter.Category.BUSINESS, business.data)
 
                                                         homeViewModel.healthNews.observe(viewLifecycleOwner){ health ->
                                                             if (health != null) {
                                                                 when (health) {
                                                                     is com.afrinaldi.core.data.Resource.Success -> {
+                                                                        binding.loadingLayout.root.visibility = View.GONE
                                                                         newsPagerAdapter.setData(
                                                                             NewsPagerAdapter.Category.HEALTH, health.data)
                                                                     }
                                                                     is com.afrinaldi.core.data.Resource.Error -> {
+                                                                        binding.loadingLayout.root.visibility = View.GONE
                                                                         Toast.makeText(requireContext(), health.message, Toast.LENGTH_SHORT)
                                                                             .show()
                                                                     }
-                                                                    is com.afrinaldi.core.data.Resource.Loading -> {}
+                                                                    is com.afrinaldi.core.data.Resource.Loading -> { binding.loadingLayout.root.visibility = View.VISIBLE }
                                                                 }
                                                             }
                                                         }
                                                     }
                                                     is com.afrinaldi.core.data.Resource.Error -> {
+                                                        binding.loadingLayout.root.visibility = View.GONE
                                                         Toast.makeText(requireContext(), business.message, Toast.LENGTH_SHORT)
                                                             .show()
                                                     }
-                                                    is com.afrinaldi.core.data.Resource.Loading -> {}
+                                                    is com.afrinaldi.core.data.Resource.Loading -> { binding.loadingLayout.root.visibility = View.VISIBLE }
                                                 }
                                             }
                                         }
                                     }
                                     is com.afrinaldi.core.data.Resource.Error -> {
+                                        binding.loadingLayout.root.visibility = View.GONE
                                         Toast.makeText(requireContext(), tech.message, Toast.LENGTH_SHORT)
                                             .show()
                                     }
-                                    is com.afrinaldi.core.data.Resource.Loading -> {}
+                                    is com.afrinaldi.core.data.Resource.Loading -> { binding.loadingLayout.root.visibility = View.VISIBLE }
                                 }
                             }
                         }
                     }
                     is com.afrinaldi.core.data.Resource.Error -> {
+                        binding.loadingLayout.root.visibility = View.GONE
                         Toast.makeText(requireContext(), sport.message, Toast.LENGTH_SHORT)
                             .show()
                     }
-                    is com.afrinaldi.core.data.Resource.Loading -> {}
+                    is com.afrinaldi.core.data.Resource.Loading -> { binding.loadingLayout.root.visibility = View.VISIBLE }
                 }
             }
         }

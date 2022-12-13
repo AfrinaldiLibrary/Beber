@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/textView3"
             style="@style/Title16"
-            android:text="Afrinaldi"
+            android:text="@string/afrinaldi"
             android:textAlignment="center"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
 
         <TextView
             style="@style/Desc10"
-            android:text="AfrinaldiLibrary"
+            android:text="@string/github_afrinaldi"
             android:textAlignment="center"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"

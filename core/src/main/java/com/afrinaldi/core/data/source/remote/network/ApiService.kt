@@ -43,11 +43,4 @@ interface ApiService {
         @Query("category") category: String = HEALTH,
         @Query("apiKey") apiKey: String = API_KEY
     ): NewsResponse
-
-    @GET("everything")
-    suspend fun getNewsSearch(
-        @Query("q") keyword: String?,
-        @Query("language") language: String?,
-        @Query("apiKey") apiKey: String = API_KEY
-    ): NewsResponse
 }

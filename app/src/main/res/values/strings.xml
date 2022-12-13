@@ -9,4 +9,6 @@
     <string name="data_not_found">Belum ada data</string>
     <string name="about_me">About me</string>
     <string name="title_bookmark">Bookmark</string>
+    <string name="afrinaldi">Afrinaldi</string>
+    <string name="github_afrinaldi">AfrinaldiLibrary</string>
 </resources>

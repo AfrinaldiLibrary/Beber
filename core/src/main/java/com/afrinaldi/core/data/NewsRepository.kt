@@ -26,8 +26,7 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean =
-//                data == null || data.isEmpty()
-                true
+                data == null || data.isEmpty()
             
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
                 remoteDataSource.getBreakingNews()
@@ -61,8 +60,7 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean =
-//                data == null || data.isEmpty()
-                true
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
                 remoteDataSource.getSportNews()
@@ -82,8 +80,7 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean =
-//                data == null || data.isEmpty()
-                true
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
                 remoteDataSource.getTechNews()
@@ -103,8 +100,8 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean =
-//                data == null || data.isEmpty()
-                true
+                data == null || data.isEmpty()
+
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
                 remoteDataSource.getBusinessNews()
@@ -124,8 +121,7 @@ class NewsRepository(
             }
 
             override fun shouldFetch(data: List<News>?): Boolean =
-//                data == null || data.isEmpty()
-                true
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> =
                 remoteDataSource.getHealthNews()

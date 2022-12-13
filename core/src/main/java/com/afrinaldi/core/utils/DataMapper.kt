@@ -3,8 +3,6 @@ package com.afrinaldi.core.utils
 import com.afrinaldi.core.data.source.local.entity.NewsEntity
 import com.afrinaldi.core.data.source.remote.response.ArticlesItem
 import com.afrinaldi.core.domain.model.News
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 
 object DataMapper {
     fun mapResponsesToEntities(input: List<ArticlesItem>, category: String): List<NewsEntity> {

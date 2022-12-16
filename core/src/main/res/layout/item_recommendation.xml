@@ -23,6 +23,7 @@
             android:scaleType="centerCrop"
             android:backgroundTint="@android:color/transparent"
             tools:src="@tools:sample/avatars"
+            android:contentDescription="@string/content_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +38,7 @@
             android:background="@drawable/shape_corner4"
             android:backgroundTint="#331E1E1E"
             android:scaleType="center"
+            android:contentDescription="@string/add_to_bookmark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -20,7 +20,7 @@ class NewsPagerAdapter(private val detailViewModel: DetailViewModel) : RecyclerV
     fun setData(key: Category, newListData: List<News>?) {
         if (newListData == null) return
         categoryMap[key] = newListData
-        notifyDataSetChanged()
+        notifyItemChanged(key.ordinal)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

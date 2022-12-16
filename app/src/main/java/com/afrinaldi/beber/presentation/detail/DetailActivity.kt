@@ -2,7 +2,6 @@ package com.afrinaldi.beber.presentation.detail
 
 import android.os.Build.VERSION
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.afrinaldi.beber.databinding.ActivityDetailBinding
@@ -30,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
         val detailNews = if (VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(DATA, News::class.java)
         } else {
-            intent.getParcelableExtra<News>(DATA)
+            intent.getParcelableExtra(DATA)
         }
 
         showDetailNews(detailNews)
@@ -55,8 +54,6 @@ class DetailActivity : AppCompatActivity() {
                 tvDate.text = Helper.formatDate(detailNews.date)
                 tvDetail.text = detailNews.content
                 tvSource.text = detailNews.name
-
-                Log.e("cek image", detailNews.image)
 
                 var statusBookmark = detailNews.isBookmark
                 ivBookmark.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, Helper.setStatusBookmark(statusBookmark)))

@@ -9,11 +9,11 @@ apply from: '../shared_dependencies.gradle'
 
 android {
     namespace 'com.afrinaldi.core'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         minSdk 26
-        targetSdk 32
+        targetSdk 33
 
         buildConfigField("String", "BASE_URL", '"https://newsapi.org/v2/"')
         buildConfigField("String", "API_KEY", '"51f9f3c546cf444797ca8f70189aeeb0"')

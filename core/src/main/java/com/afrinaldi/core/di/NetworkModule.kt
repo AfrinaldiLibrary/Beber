@@ -3,6 +3,7 @@ package com.afrinaldi.core.di
 import androidx.viewbinding.BuildConfig
 import com.afrinaldi.core.BuildConfig.BASE_URL
 import com.afrinaldi.core.data.source.remote.network.ApiService
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -17,11 +18,16 @@ val networkModule = module {
         } else {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
-
+        val hostname = "newsapi.org"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/svXYI8MQpjkQ2SAbnIiqZOvk/sdbTlWScBbeJk4Legk=")
+            .add(hostname, "sha256/7xmA6N1F1gp6ikj57Bg4DMG0jfUB+mZsEL4mZO0qbfU=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
 
